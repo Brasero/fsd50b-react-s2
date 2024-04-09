@@ -1,32 +1,26 @@
 import {useSelector, useDispatch} from "react-redux";
 import './App.css'
+import {selectDragonError, selectDragonName, selectDragons} from "./store/selectors/index.js";
+import {addDragon, setDragonError, setDragonName} from "./store/action/index.js";
 
 function App() {
 
     const dispatch = useDispatch()
 
-    const name = useSelector((state) => state.name)
-    const dragons = useSelector((state) => state.dragons)
-    const error = useSelector(state => state.error)
+    const name = useSelector(selectDragonName)
+    const dragons = useSelector(selectDragons)
+    const error = useSelector(selectDragonError)
 
     const handleChange = (e) => {
-        dispatch({
-            type: 'DRAGON/SET_VALUE',
-            payload: e.target.value
-        })
+        dispatch(setDragonName(e.target.value))
     }
 
     const handleDragonSubmit = () => {
         if(name.trim() === '' || dragons.find((dragon) => dragon.name.toLowerCase() === name.toLowerCase()) !== undefined) {
-            dispatch({
-                type: 'DRAGON/SET_ERROR',
-                payload: 'Donnée invalide'
-            })
+            dispatch(setDragonError('Donnée invalide'))
             return;
         }
-        dispatch({
-            type: 'DRAGON/ADD'
-        })
+        dispatch(addDragon())
     }
 
   return (

@@ -1,3 +1,4 @@
+import {DRAGON_ADD, DRAGON_SET_ERROR, DRAGON_SET_VALUE} from "../constant/action-type.js";
 
 const initialState = {
     name: '',
@@ -9,14 +10,14 @@ const initialState = {
 const dragonReducer = (state = initialState, action) => {
     switch (action.type) {
 
-        case 'DRAGON/SET_VALUE':
+        case DRAGON_SET_VALUE:
             return {
                 ...state,
                 name: action.payload,
                 error: ''
             }
 
-        case 'DRAGON/ADD':
+        case DRAGON_ADD:
             return {
                 ...state,
                 dragons: [...state.dragons, {id: state.id, name: state.name}],
@@ -25,7 +26,7 @@ const dragonReducer = (state = initialState, action) => {
                 error: ''
             }
 
-        case "DRAGON/SET_ERROR":
+        case DRAGON_SET_ERROR:
             return {
                 ...state,
                 error: action.payload
