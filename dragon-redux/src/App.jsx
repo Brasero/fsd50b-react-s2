@@ -1,7 +1,7 @@
 import {useSelector, useDispatch} from "react-redux";
-import './App.css'
+import './App.scss'
 import {selectDragonError, selectDragonName, selectDragons} from "./store/selectors/index.js";
-import {addDragon, setDragonError, setDragonName} from "./store/action/index.js";
+import {addDragon, deleteDragon, setDragonError, setDragonName} from "./store/action/index.js";
 
 function App() {
 
@@ -16,36 +16,42 @@ function App() {
     }
 
     const handleDragonSubmit = () => {
-        if(name.trim() === '' || dragons.find((dragon) => dragon.name.toLowerCase() === name.toLowerCase()) !== undefined) {
-            dispatch(setDragonError('Donnée invalide'))
+        if (name.trim() === '' || dragons.find((dragon) => dragon.name.toLowerCase() === name.toLowerCase().trim()) !== undefined) {
+            dispatch(setDragonError('invalid Data'))
             return;
         }
         dispatch(addDragon())
     }
 
-  return (
-    <main>
-      <header>
-        <h1>Dragon List</h1>
-          <p>Nombre de dragons dans la liste : {dragons.length}</p>
-      </header>
-      <div>
-        <div>
-            {error !== "" && <p style={{color: "red"}}>{error}</p>}
-          <input type={"text"} onChange={handleChange} value={name} />
-          <button onClick={handleDragonSubmit}>Ajouter</button>
-        </div>
-        <div>
-            {
-                dragons.length > 0 ?
-                    dragons.map(dragon => <div key={dragon.id}>{dragon.name}</div>)
-                    :
-                    <p>Aucun dragon dans la liste</p>
-            }
-        </div>
-      </div>
-    </main>
-  )
+    return (
+        <main>
+            <header>
+                <h1>Dragon List</h1>
+                <p>Number of dragons : {dragons.length}</p>
+            </header>
+            <div id={'content'}>
+                <div id={"inputGroup"}>
+                    <input type={"text"} onChange={handleChange} value={name}/>
+                    <button onClick={handleDragonSubmit}>Add</button>
+                    {error !== "" && <p style={{color: "red"}}>{error}</p>}
+                </div>
+                <div id={"list"}>
+                    <h4>List</h4>
+                    {
+                        dragons.length > 0 ?
+                            dragons.map(dragon =>
+                                <div key={dragon.id}>
+                                    <span>{dragon.name}</span>
+                                    <button onClick={() => dispatch(deleteDragon(dragon.id))}>X</button>
+                                </div>
+                            )
+                            :
+                            <p>No dragon</p>
+                    }
+                </div>
+            </div>
+        </main>
+    )
 }
 
 export default App
