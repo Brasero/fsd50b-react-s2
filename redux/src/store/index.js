@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, legacy_createStore as createStore} from "redux";
 import shopReducer from "./reducer/shopReducer.js";
 import taskReducer from "./reducer/taskReducer.js";
-
+import {composeWithDevTools} from "redux-devtools-extension";
 
 const logMiddleware = (store) => (next) => (action) => {
     console.log({
@@ -39,9 +39,10 @@ const store = createStore(
             tasks: []
         }
     },
-    applyMiddleware(
-        logMiddleware,
-
+    composeWithDevTools(
+        applyMiddleware(
+            logMiddleware,
+        )
     ),
 
 )
