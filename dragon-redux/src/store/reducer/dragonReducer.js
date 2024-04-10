@@ -2,8 +2,17 @@ import {DRAGON_ADD, DRAGON_DELETE, DRAGON_SET_ERROR, DRAGON_SET_VALUE} from "../
 
 const initialState = {
     name: '',
-    dragons: [],
-    id: 1,
+    dragons: [
+        {
+            id: 1,
+            name: 'Balla'
+        },
+        {
+            id: 2,
+            name: 'Dard'
+        }
+    ],
+    id: 3,
     error: ''
 }
 
