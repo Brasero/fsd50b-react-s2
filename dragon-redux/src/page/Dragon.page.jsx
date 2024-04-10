@@ -31,7 +31,7 @@ const DragonPage = () => {
             <div id={'content'}>
                 <div id={"inputGroup"}>
                     <input type={"text"} placeholder={'Dragon name'} onChange={handleChange} value={name}/>
-                    <button onClick={handleDragonSubmit}>Add</button>
+                    <button onClick={handleDragonSubmit}>Add Dragon</button>
                     {error !== "" && <p style={{color: "red"}}>{error}</p>}
                 </div>
                 <div id={"list"}>

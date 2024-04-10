@@ -4,3 +4,4 @@ export const selectDragonError = (state) => state.dragonReducer.error
 export const selectNewKnight = (state) => state.knightReducer.newKnight
 export const selectKnights = (state) => state.knightReducer.knights
 export const selectKnightError = (state) => state.knightReducer.error
+export const selectCouple = (state) => state.coupleReducer.couple

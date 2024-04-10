@@ -1,4 +1,10 @@
-import {KNIGHT_ADD, KNIGHT_DELETE, KNIGHT_SET_ERROR, KNIGHT_SET_VALUE} from "../constant/action-type.js";
+import {
+    KNIGHT_ADD,
+    KNIGHT_DELETE,
+    KNIGHT_SET_ERROR,
+    KNIGHT_SET_UNAVAILABLE,
+    KNIGHT_SET_VALUE
+} from "../constant/action-type.js";
 
 const initialState = {
     newKnight: {
@@ -9,7 +15,8 @@ const initialState = {
         {
             name: 'Dardagnan',
             age: 45,
-            id: 1
+            id: 1,
+            available: true
         }
     ],
     id: 2,
@@ -32,7 +39,7 @@ const knightReducer = (state = initialState, action) => {
         case KNIGHT_ADD:
             return {
                 ...state,
-                knights: [...state.knights, {id: state.id, name: state.newKnight.name.trim(), age: parseInt(state.newKnight.age)}],
+                knights: [...state.knights, {id: state.id, name: state.newKnight.name.trim(), age: parseInt(state.newKnight.age), available: true}],
                 error: '',
                 id: state.id + 1,
                 newKnight: {
@@ -51,6 +58,12 @@ const knightReducer = (state = initialState, action) => {
             return {
                 ...state,
                 error: action.payload
+            }
+
+        case KNIGHT_SET_UNAVAILABLE:
+            return {
+                ...state,
+                knights: state.knights.map(knight => knight.id === action.payload.id ? {...knight, available: false} : knight)
             }
 
         default:

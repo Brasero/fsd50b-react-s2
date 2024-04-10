@@ -52,7 +52,7 @@ const KnightPage = () => {
                         placeholder={'Knight age'}
                         onChange={handleChange}
                     />
-                    <button onClick={handleSubmit}>Add</button>
+                    <button onClick={handleSubmit}>Add Knight</button>
                     {error !== "" && <p style={{color: "red"}}>{error}</p>}
                 </div>
                 <div id={"list"}>
